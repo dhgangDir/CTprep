@@ -1,30 +1,35 @@
 #include <iostream>
-
 using namespace std;
 
-int x, y, date;
-string days[] = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+int x, y;
+int month[] = {
+    0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+};
+string days[] = {
+    "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"
+};
 
-int main() {
+void input() {
     cin >> x >> y;
+}
+
+void solution() {
+    int sum_day = 0;
 
     for (int i = 1; i < x; i++) {
-        switch (i) { 
-            case 1: case 3: case 5: case 7: 
-            case 8: case 10: case 12:
-                date += 31;
-                break;
-            case 2:
-                date += 28;
-                break;
-            case 4: case 6: case 9: case 11:
-                date += 30;
-                break;
-        }
+        sum_day = sum_day + month[i];
     }
-    date += y;
+    sum_day += y;
 
-    cout << days[date % 7] << '\n';
+    cout << days[sum_day%7] << '\n';
+}
 
+void solve() {
+    input();
+    solution();
+}
+
+int main() {
+    solve();
     return 0;
 }
