@@ -1,25 +1,34 @@
 #include <iostream>
-#include <algorithm>
-
 using namespace std;
 
-#define MAX_NUMBER 1000004
+#define MAX_LEN 1000004
 
-int counts[MAX_NUMBER];
-int x;
+int dp[MAX_LEN];
+int n;
+
+void input() {
+    cin >> n;
+}
+
+void solution() {
+    dp[1] = 0;
+    for (int i = 2; i <= n; ++i) {
+        dp[i] = dp[i - 1] + 1;
+        if (!(i % 3)) dp[i] = min(dp[i/3] + 1, dp[i]);
+        if (!(i % 2)) dp[i] = min(dp[i/2] + 1, dp[i]);
+    }
+    cout << dp[n] << '\n';
+}
+
+void solve() {
+    input();
+    solution();
+}
 
 int main() {
-    fill(counts, counts + MAX_NUMBER, -1);
-    cin >> x;
-    counts[x] = 0;
-    for (int i = x; i > 1; i--) {
-        if (counts[i] == -1) continue;
-        if (!(i % 3) && (counts[i / 3] == -1 || counts[i / 3] > counts[i] + 1)) counts[i / 3] = counts[i] + 1;
-        if (!(i % 2) && (counts[i / 2] == -1 || counts[i / 2] > counts[i] + 1)) counts[i / 2] = counts[i] + 1;
-        if (counts[i - 1] == -1 || counts[i - 1] > counts[i] + 1)counts[i - 1] = counts[i] + 1;
-    }
-
-    cout << counts[1] << '\n';
-
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    solve();
     return 0;
 }
