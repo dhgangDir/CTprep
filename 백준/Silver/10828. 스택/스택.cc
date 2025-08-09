@@ -11,16 +11,14 @@ void input() {
 
 void solution() {
     string cmd;
-    int num;
-
-    while(n--) {
+    int x;
+    while (n--) {
         cin >> cmd;
         if (cmd == "push") {
-            cin >> num;
-            stk.push(num);
+            cin >> x;
+            stk.push(x);
         } else if (cmd == "pop") {
-            if (!stk.size())
-                cout << -1 << '\n';
+            if (stk.empty()) cout << "-1\n";
             else {
                 cout << stk.top() << '\n';
                 stk.pop();
@@ -28,15 +26,10 @@ void solution() {
         } else if (cmd == "size") {
             cout << stk.size() << '\n';
         } else if (cmd == "empty") {
-            if (!stk.size())
-                cout << 1 << '\n';
-            else 
-                cout << 0 << '\n';
+            cout << (int) stk.empty() << '\n';
         } else {
-            if (!stk.size())
-                cout << -1 << '\n';
-            else 
-                cout << stk.top() << '\n';
+            if (stk.empty()) cout << "-1\n";
+            else cout << stk.top() << '\n';
         }
     }
 }
