@@ -2,8 +2,8 @@
 #include <queue>
 using namespace std;
 
+queue<int> qu;
 int n;
-queue<int> q;
 
 void input() {
     cin >> n;
@@ -11,34 +11,30 @@ void input() {
 
 void solution() {
     string cmd;
-    int num;
-    while (n--) {
+
+    while (n-- ) {
         cin >> cmd;
         if (cmd == "push") {
+            int num;
             cin >> num;
-            q.push(num);
+            qu.push(num);
         } else if (cmd == "pop") {
-            if (q.empty())
-                cout << -1 << '\n';
+            if (qu.empty()) cout << -1 << '\n';
             else {
-                cout << q.front() << '\n';
-                q.pop();
+                cout << qu.front() << '\n';
+                qu.pop();
             }
-        } else if (cmd == "size") 
-            cout << q.size() << '\n';
-          else if (cmd == "empty") {
-            cout << (int)q.empty() << '\n';
+        } else if (cmd == "size") {
+            cout << qu.size() << '\n';
+        } else if (cmd == "empty") {
+            cout << (int)qu.empty() << '\n';
         } else if (cmd == "front") {
-            if (q.empty()) 
-                cout << -1 << '\n';
-            else 
-                cout << q.front() << '\n';
+            if (qu.empty()) cout << -1 << '\n';
+            else cout << qu.front() << '\n';
         } else {
-            if (q.empty()) 
-                cout << -1 << '\n';
-            else 
-                cout << q.back() << '\n';
-        } 
+            if (qu.empty()) cout << -1 << '\n';
+            else cout << qu.back() << '\n';
+        }
     }
 }
 
