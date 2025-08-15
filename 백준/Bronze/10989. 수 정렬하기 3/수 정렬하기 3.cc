@@ -1,25 +1,25 @@
 #include <iostream>
-using namespace std; 
+using namespace std;
 
 #define MAX_NUM 10004
 
-int arr[MAX_NUM];
+int num[MAX_NUM];
 int n, max_num;
+
 void input() {
     cin >> n;
-    int input_num;
-    while(n--) {
-        cin >> input_num;
-        arr[input_num]++;
-        max_num = max(max_num, input_num);
+    for (int i = 0; i < n; i++) {
+        int tmp;
+        cin >> tmp;
+        num[tmp]++;
+        max_num = max(max_num, tmp);
     }
 }
 
 void solution() {
     for (int i = 1; i <= max_num; i++) {
-        for (int j = arr[i]; j > 0; j--) {
+        while (num[i]--)
             cout << i << '\n';
-        }
     }
 }
 
@@ -29,6 +29,9 @@ void solve() {
 }
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     solve();
     return 0;
 }
