@@ -1,37 +1,36 @@
 #include <iostream>
-#include <map>
+#include <algorithm>
 using namespace std;
 
+#define MAX_LEN 100004
 typedef long long ll;
 
-map<ll, ll> card_mp;
+ll arr[MAX_LEN];
 int n;
 
 void input() {
-    ll card;
     cin >> n;
-    while(n--) {
-        cin >> card;
-        if (card_mp.find(card) != card_mp.end()) 
-            card_mp[card]++;
-        else 
-            card_mp[card] = 1;
-    }
+    for (int i = 0; i < n; i++) cin >> arr[i];
 }
 
 void solution() {
-    auto it = card_mp.begin();
-    ll max_num = (*it).first;
-    ll max_cnt = (*it).second;
+    sort(arr, arr+n);
 
-    advance(it, 1);
-    for (; it != card_mp.end(); it++) {
-        if (max_cnt < (*it).second) {
-            max_num = (*it).first;
-            max_cnt = (*it).second;
-        } 
+    ll cmp_num = arr[0], cnt = 1, max_cnt = 0, max_num;
+    for (int i = 1; i < n; i++) {
+        if (cmp_num != arr[i]) {
+            if (max_cnt < cnt) {
+                max_cnt = max(max_cnt, cnt);
+                max_num = cmp_num;
+            }
+            cmp_num = arr[i];
+            cnt = 1;
+        } else cnt++;
     }
-
+    if (max_cnt < cnt) {
+        max_cnt = max(max_cnt, cnt);
+        max_num = cmp_num;
+    }
     cout << max_num << '\n';
 }
 
@@ -41,6 +40,9 @@ void solve() {
 }
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     solve();
     return 0;
 }
