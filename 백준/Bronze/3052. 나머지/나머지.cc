@@ -1,21 +1,18 @@
 #include <iostream>
-
 using namespace std;
 
-#define FLAG 42
-int pocket[FLAG], cnt;
+bool nums[42];
+int cnt;
 
 int main() {
     int n;
+    while (cin >> n)
+        if (!nums[n%42]) {
+            nums[n%42] = true;
+            cnt++;
+        }
 
-    for (int i = 0; i < 10; i++) {
-        cin >> n;
-        pocket[n%FLAG]++;
-    }
-    
-    for (int i = 0; i < FLAG; i++)
-        if (pocket[i]) cnt++;
-    
-    cout << cnt << '\n';
+    cout << cnt << "\n";
+
     return 0;
 }
