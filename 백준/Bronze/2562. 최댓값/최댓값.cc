@@ -1,19 +1,19 @@
 #include <iostream>
 using namespace std;
 
-int max_number, max_index, input_number;
-
 int main() {
-    for (int i = 0; i < 9; i++) {
-        cin >> input_number;
-        if (max_number < input_number) {
-            max_number = input_number;
-            max_index = i;
+    int maxNum, maxIndex = 1;
+    int n;
+
+    cin >> maxNum;
+    for (int i = 1; i < 9; i++) {
+        cin >> n;
+        if (n > maxNum) {
+            maxIndex = i + 1;
+            maxNum = n;
         }
     }
-
-    cout << max_number << '\n';
-    cout << max_index + 1<< '\n';
+    cout << maxNum << "\n" << maxIndex << "\n";
 
     return 0;
 }
