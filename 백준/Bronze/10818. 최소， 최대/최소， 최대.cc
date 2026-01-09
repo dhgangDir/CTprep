@@ -1,21 +1,22 @@
 #include <iostream>
-
 using namespace std;
 
-int n, max_number, min_number;
-int input_number;
-
 int main() {
-    cin >> n >> input_number;
+    int n;
+    cin >> n;
 
-    max_number = min_number = input_number;
-    while (--n) {
-        cin >> input_number;
-        if (max_number < input_number) max_number = input_number;
-        if (min_number > input_number) min_number = input_number;
+    int* arr = new int[n];
+    for (int i = 0 ; i < n; i++)
+        cin >> arr[i];
+
+    int minNum = arr[0], maxNum = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (minNum > arr[i]) minNum = arr[i];
+        if (maxNum < arr[i]) maxNum = arr[i];
     }
+    delete[] arr;
 
-    cout << min_number << ' ' << max_number << '\n';
+    cout << minNum << " " << maxNum << "\n";
 
     return 0;
 }
