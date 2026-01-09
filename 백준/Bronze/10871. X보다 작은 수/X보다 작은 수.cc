@@ -1,16 +1,16 @@
 #include <iostream>
 using namespace std;
 
-int n, x, a;
-
 int main() {
+    int n, x;
+
     cin >> n >> x;
 
-    while (n--) {
-        cin >> a;
-        if (x > a) cout << a << ' ';
-    }
-    cout << '\n';
-    
+    int a;
+    while (cin >> a)
+        if (a < x)
+            cout << a << " ";
+    cout << "\n";
+
     return 0;
 }
