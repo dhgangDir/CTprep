@@ -1,12 +1,13 @@
-#include <iostream>
-#include <string>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-string input_string;
-
 int main() {
-    while (getline(cin, input_string)) 
-        cout << input_string << '\n';
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    string s;
+    while (getline(cin, s))
+        cout << s << "\n";
+
     return 0;
 }
