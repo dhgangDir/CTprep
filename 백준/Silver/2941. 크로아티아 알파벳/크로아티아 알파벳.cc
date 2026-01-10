@@ -8,22 +8,18 @@ int main() {
     string s;
     cin >> s;
 
-    int ans = 0;
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == 'j' && i - 1 >= 0)
-            if (s[i - 1] == 'l' || s[i - 1] == 'n') continue;
-        if (s[i] == '=') {
-            if (i - 2 >= 0 && s[i - 2] == 'd' && s[i - 1] == 'z') {
-                ans--;
-                continue;
-            }
-            if (s[i - 1] == 'z' || s[i - 1] == 'c' || s[i - 1] == 's') continue;
+    vector<string> cro = {"c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="};
+
+    for (auto a : cro) {
+        while (true) {
+            int idx = s.find(a);
+
+            if (idx == string::npos) break;
+            s.replace(idx, a.size(), "#");
         }
-        if (s[i] == '-')
-            if (s[i - 1] == 'c' || s[i - 1] == 'd') continue;
-        ans++;
     }
 
-    cout << ans << "\n";
+    cout << s.size() << "\n";
+
     return 0;
 }
