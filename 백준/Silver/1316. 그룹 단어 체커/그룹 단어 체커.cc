@@ -12,24 +12,25 @@ int main() {
     while (n--) {
         string s;
         cin >> s;
-        int v[26];
-        fill(v, v + 26, 0);
-        char c = '\0';
-        bool flag = false;
+
+        bool check[26];
+        fill(check, check + 26, 0);
+        bool is_group = true;
+
         for (int i = 0; i < s.size(); i++) {
-            if (v[s[i] - 'a'] && c != s[i]) {
-                flag = true;
-                break;
+            int idx = s[i] - 'a';
+
+            if (check[idx]) {
+                if (s[i - 1] != s[i]) {
+                    is_group = false;
+                    break;
+                }
             }
-            if (!v[s[i] - 'a'] && c != s[i]) {
-                c = s[i];
-                v[s[i] - 'a'] = 1;
-            }
+            check[idx] = true;
         }
-        if (!flag) ans++;
+        if (is_group) ans++;
     }
 
     cout << ans << "\n";
-
     return 0;
 }
