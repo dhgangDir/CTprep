@@ -1,30 +1,28 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define EAGE 10
-#define LEAGE 104
-bool grid[LEAGE][LEAGE];
+bool visited[104][104];
 
 int main() {
-    int t, x, y, cnt = 0;
-    cin >> t;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-    while (t--) {
-        cin >> x >> y;
-        for (int i = x; i < x + EAGE; i++) {
-            for (int j = y; j < y + EAGE; j++) {
-                grid[i][j] = true;
+    int n;
+    cin >> n;
+
+    int ans = 0;
+    while (n--) {
+        int r, c;
+        cin >> r >> c;
+
+        for (int i = r; i <= 100 && i < r + 10; i++)
+            for (int j = c; j <= 100 && j < c + 10; j++) {
+                if (!visited[i][j]) ans++;
+                visited[i][j] = true;
             }
-        }
     }
 
-    for (int i = 0; i < LEAGE; i++) {
-        for (int j = 0; j < LEAGE; j++) {
-            if (grid[i][j]) cnt++; 
-        }
-    }
-
-    cout << cnt << '\n';
+    cout << ans << "\n";
 
     return 0;
 }
