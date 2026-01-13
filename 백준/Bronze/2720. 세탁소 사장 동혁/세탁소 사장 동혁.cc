@@ -1,30 +1,22 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int t, c;
-int change[4] = {25, 10, 5, 1};
-
-void solution() {
-    for (int i = 0; i < 4; i++) {
-        cout << c / change[i] << ' ';
-        c = c % change[i];
-    }
-    cout << '\n';
-}
-
-void input() {
-    cin >> t;
-}
-
-void solve() {
-    input();
-    while (t--) {
-        cin >> c;
-        solution();
-    }
-}
-
 int main() {
-    solve();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int c;
+        cin >> c;
+        cout << c / 25 << " ";
+        cout << c % 25 / 10 << " ";
+        cout << c % 25 % 10 / 5 << " ";
+        cout << c % 25 % 10 % 5 << " ";
+        cout << "\n";
+    }
+
     return 0;
 }
