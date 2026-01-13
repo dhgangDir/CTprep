@@ -1,27 +1,15 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int day, a, b, v;
-
-void input() {
-    cin >> a >> b >> v;
-}
-
-void solution() {
-    v = v - a;
-    int one_day_move = a - b;
-    day = 1 + v / one_day_move;
-    day += (v % one_day_move ? 1 : 0);
-
-    cout << day << '\n';
-}
-
-void solve() {
-    input();
-    solution();
-}
-
 int main() {
-    solve();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int a, b, v;
+    cin >> a >> b >> v;
+
+    int d = (v - a) % (a - b) ? 2 : 1;
+    cout << (v - a) / (a - b) + d << "\n";
+
     return 0;
 }
