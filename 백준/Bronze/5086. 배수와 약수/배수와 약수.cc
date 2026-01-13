@@ -1,25 +1,20 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int f, s;
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-void solution() {
+    int f, s;
+
     while (true) {
         cin >> f >> s;
-        if (!f && !s) exit(0);
-        if (!(s % f)) 
-            cout << "factor\n";
-        else if (!(f % s))
-            cout << "multiple\n";
-        else 
-            cout << "neither\n";
-    }
-}
+        if (!f && !s) break;
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    solution();
+        if (!(s % f)) cout << "factor\n";
+        else if (!(f % s)) cout << "multiple\n";
+        else cout << "neither\n";
+    }
+
     return 0;
 }
