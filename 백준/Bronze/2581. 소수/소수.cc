@@ -1,45 +1,34 @@
-#include <iostream>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_NUM 10004
-int sieve[MAX_NUM] = {1, 1, 0, };
-int n, m, sum, min_prime;
-
-void input() {
-    cin >> n >> m;
-}
-
-void solution() {
-    int sqrt_m = (int) sqrt(m);
-    for (int i = 2; i <= sqrt_m; i++) {
-        for (int j = 2; j * i <= m; j++) {
-            sieve[j * i] = 1;
-        }
-    }
-
-    for (int i = n; i <= m; i++) {
-        if (!sieve[i]) {
-            if (!min_prime) min_prime = i;
-            sum += i;
-        }
-    }
-    if (sum == 0) cout << -1 << '\n';
-    else {
-        cout << sum << '\n';
-        cout << min_prime << '\n';
-    }
-}
-
-void solve() {
-    input();
-    solution();
-}
-
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    solve();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int n, m;
+    cin >> m >> n;
+
+    int sum = 0, minNum = -1;
+
+    for (int i = m; i <= n; ++i) {
+        if (i == 1) continue;
+
+        bool flag = true;
+        for (int j = 2; j * j <= i; j++) {
+            if (!(i % j)) {
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag) {
+            sum += i;
+            if (minNum == -1) minNum = i;
+        }
+    }
+
+    if (minNum != -1) cout << sum << "\n" << minNum << "\n";
+    else cout << minNum << "\n";
+
     return 0;
 }
