@@ -1,23 +1,27 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main () {
-    int input, cnt = 0;
-    cin >> input;
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-    while(input--){
-        int number, weight = 2;
-        bool check = true;
-        cin >> number;
-        while(number >= weight){
-            if((number % weight == 0 && number != weight)){
-                check = false;
+    int n;
+    cin >> n;
+
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+        int num;
+        cin >> num;
+        if (num == 1) ans++;
+        for (int j = 2; j < num; ++j) {
+            if (!(num % j)) {
+                ans++;
                 break;
             }
-            weight++;
-        } 
-        if(check && number != 1)
-            cnt++;
+        }
     }
-    cout << cnt;
+
+    cout << n - ans << "\n";
+
+    return 0;
 }
