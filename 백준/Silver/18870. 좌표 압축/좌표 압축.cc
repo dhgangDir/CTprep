@@ -15,16 +15,14 @@ int main() {
         cin >> v[i];
 
     vector<int> cpv = v;
-
     sort(cpv.begin(), cpv.end());
     cpv.erase(unique(cpv.begin(), cpv.end()), cpv.end());
 
-    map<int, int> mp;
-    for (int i = 0; i < cpv.size(); ++i)
-        mp[cpv[i]] = i;
-
-    for (auto i : v)
-        cout << mp[i] << " ";
+    for (int i = 0; i < n; ++i) {
+        int idx = lower_bound(cpv.begin(), cpv.end(), v[i]) - cpv.begin();
+        cout << idx << " ";
+    }
+    cout << "\n";
 
     return 0;
 }
