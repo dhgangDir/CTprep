@@ -1,37 +1,27 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<pair<int, string>> names;
-int n;
-
-void input() {
-    int num;
-    string name;
-    cin >> n;
-    while(n--) {
-        cin >> num >> name;
-        names.push_back({num, name});
-    }
-}
+vector<pair<int, string>> v;
 
 bool cmp(pair<int, string> a, pair<int, string> b) {
     return a.first < b.first;
 }
 
-void solution() {
-    stable_sort(names.begin(), names.end(), cmp);
-    for (const auto& p : names)
-        cout << p.first << ' ' << p.second << '\n';
-}
-
-void solve() {
-    input();
-    solution();
-}
-
 int main() {
-    solve();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int n;
+    cin >> n;
+
+    v.resize(n);
+    for (int i = 0; i < n; ++i)
+        cin >> v[i].first >> v[i].second;
+
+    stable_sort(v.begin(), v.end(), cmp);
+
+    for (auto it : v)
+        cout << it.first << " " << it.second << "\n";
+
     return 0;
 }
