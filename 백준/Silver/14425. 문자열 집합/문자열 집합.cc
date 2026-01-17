@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-set<string> st;
+unordered_set<string> st;
 
 int main() {
     ios::sync_with_stdio(0);
@@ -24,7 +24,7 @@ int main() {
         if (st.find(target) != st.end())
             ans++;
     }
-    
+
     cout << ans << "\n";
 
     return 0;
