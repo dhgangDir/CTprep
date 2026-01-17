@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-unordered_set<string> st;
+set<string, greater<string>> st;
 
 int main() {
     ios::sync_with_stdio(0);
@@ -10,24 +10,16 @@ int main() {
     int n;
     cin >> n;
     while (n--) {
-        string name, ctl;
-        cin >> name >> ctl;
-        if (ctl == "enter")
+        string name, target;
+        cin >> name >> target;
+
+        if (target == "enter")
             st.insert(name);
         else
             st.erase(name);
     }
 
-    vector<string> v(st.size());
-    int idx = 0;
-    for (auto n : st) {
-        v[idx] = n;
-        idx++;
-    }
-
-    sort(v.begin(), v.end(), greater<string>());
-
-    for (auto n : v)
+    for (auto n : st)
         cout << n << "\n";
 
     return 0;
