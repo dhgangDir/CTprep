@@ -10,13 +10,15 @@ int main() {
     int n;
     cin >> n;
 
-    int input;
+    int mx = 0;
     for (int i = 0; i < n; ++i) {
+        int input;
         cin >> input;
         check[input]++;
+        mx = max(input, mx);
     }
 
-    for (int i = 1; i <= 10000; ++i) {
+    for (int i = 1; i <= mx; ++i) {
         while (check[i]) {
             cout << i << "\n";
             --check[i];
