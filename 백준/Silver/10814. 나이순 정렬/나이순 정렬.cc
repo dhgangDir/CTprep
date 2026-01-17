@@ -3,7 +3,7 @@ using namespace std;
 
 vector<pair<int, string>> v;
 
-bool cmp(pair<int, string> a, pair<int, string> b) {
+bool cmp(const pair<int, string>& a, const pair<int, string>& b) {
     return a.first < b.first;
 }
 
