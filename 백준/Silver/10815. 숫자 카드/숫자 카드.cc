@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-map<int, bool> mp;
+vector<int> v;
 
 int main() {
     ios::sync_with_stdio(0);
@@ -10,21 +10,18 @@ int main() {
     int n;
     cin >> n;
 
-    while (n--) {
-        int input;
-        cin >> input;
-        mp[input] = true;
-    }
+    v.resize(n);
+    for (int i = 0; i < n; ++i)
+        cin >> v[i];
+
+    sort(v.begin(), v.end());
 
     int m;
     cin >> m;
     while (m--) {
-        int input;
-        cin >> input;
-        if (mp.find(input) != mp.end())
-            cout << "1 ";
-        else
-            cout << "0 ";
+        int target;
+        cin >> target;
+        cout << binary_search(v.begin(), v.end(), target) << " ";
     }
     cout << "\n";
 
