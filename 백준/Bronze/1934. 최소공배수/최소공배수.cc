@@ -1,21 +1,27 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int t, a, b;
-
-int gcd(int x, int y) {
-    return y ? gcd(y, x % y) : x;
+int get_gcd(int a, int b) {
+    return b ? get_gcd(b, a % b) : a;
 }
 
-int lcm(int x, int y) {
-    return (x / gcd(x, y)) * y;
+int get_lcm(int a, int b) {
+    if (!a || !b) return 0;
+    return a / get_gcd(a, b) * b;
 }
 
 int main() {
-    cin >> t;
-    while (t--) {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int n;
+    cin >> n;
+
+    while (n--) {
+        int a, b;
         cin >> a >> b;
-        cout << lcm(a, b) << '\n';
+        cout << get_lcm(a, b) << "\n";
     }
+
     return 0;
 }
