@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-unordered_map<string, string> np;
-unordered_map<string, string> pn;
+unordered_map<string, int> mp;
+vector<string> v;
 
 int main() {
     ios::sync_with_stdio(0);
@@ -11,20 +11,23 @@ int main() {
     int n, m;
     cin >> n >> m;
 
+    v.resize(n + 1);
     for (int i = 1; i <= n; i++) {
         string name;
         cin >> name;
-        np[to_string(i)] = name;
-        pn[name] = to_string(i);
+        mp[name] = i;
+        v[i] = name;
     }
 
     while (m--) {
         string s;
         cin >> s;
-        if (np.find(s) != np.end())
-            cout << np[s] << "\n";
-        else
-            cout << pn[s] << "\n";
+
+        if (isdigit(s[0])) {
+            int idx = stoi(s);
+            cout << v[idx] << "\n";
+        } else
+            cout << mp[s] << "\n";
     }
 
     return 0;
