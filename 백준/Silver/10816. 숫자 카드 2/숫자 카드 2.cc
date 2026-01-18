@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-unordered_map<int, int> mp;
+vector<int> v;
 
 int main() {
     ios::sync_with_stdio(0);
@@ -10,19 +10,19 @@ int main() {
     int n;
     cin >> n;
 
-    while (n--) {
-        int input;
-        cin >> input;
-        mp[input]++;
-    }
+    v.resize(n);
+    for (int i = 0; i < n; ++i)
+        cin >> v[i];
+
+    sort(v.begin(), v.end());
 
     int m;
     cin >> m;
-
     while (m--) {
         int target;
         cin >> target;
-        cout << mp[target] <<  " ";
+        cout << upper_bound(v.begin(), v.end(), target) -
+            lower_bound(v.begin(), v.end(), target) << " ";
     }
     cout << "\n";
 
