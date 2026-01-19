@@ -1,33 +1,27 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main () {
-    int M, N, last;
-    cin >> M >> N;
+vector<bool> state(1000001, true);
 
-    vector<bool> sieve(N + 1, false);
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-    sieve[0] = sieve[1] = true;
+    int m, n;
+    cin >> m >> n;
 
-    last = (int)pow((double)N, 0.5);
+    state[0] = state[1] = false;
 
-    for(int i = 2; i <= last; i++){
-        if(sieve[i] != false){
-            continue;
-        }
-        else{
-            for(int j = 2; j * i <= N; j++){
-                if(sieve[j*i] == false)
-                    sieve[j*i] = true;
-            }
+    for (int i = 2; i * i <= n; ++i) {
+        if (state[i]) {
+            for (int j = i * i; j <= n; j += i)
+                state[j] = false;
         }
     }
 
-    for(int check = M; check <= N; check++){
-        if(sieve[check] != true){
-            cout << check << '\n';
-        }
-    }
+    for (int i = m; i <= n; ++i)
+        if (state[i])
+            cout << i << "\n";
+
+    return 0;
 }
