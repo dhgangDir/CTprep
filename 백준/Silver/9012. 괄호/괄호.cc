@@ -1,46 +1,36 @@
-#include <iostream>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
 
-int n;
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-void input() {
-    cin >> n;
-}
+    int t;
+    cin >> t;
 
-void solution() {
-    while(n--) {
+    while (t--) {
+        string s;
+        cin >> s;
+
         stack<char> stk;
-        string bracket;
         bool flag = true;
-
-        cin >> bracket;
-        for (const auto& c : bracket) {
-            if (c == '(') 
+        for (auto& c : s) {
+            if (c == '(')
                 stk.push(c);
-            else if (c == ')'){
-                if(!stk.empty())
-                    stk.pop();
-                else {
-                    flag = false; 
+            else {
+                if (stk.empty()) {
+                    flag = false;
                     break;
                 }
+                stk.pop();
             }
         }
-        if (flag && stk.empty()) cout << "YES\n";
-        else cout << "NO\n";
+
+        if (flag && stk.empty())
+            cout << "YES\n";
+        else
+            cout << "NO\n";
     }
-}
 
-void solve() {
-    input();
-    solution();
-}
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    solve();
     return 0;
 }
