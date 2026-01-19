@@ -12,24 +12,23 @@ int main() {
         string s;
         cin >> s;
 
-        stack<char> stk;
-        bool flag = true;
-        for (auto& c : s) {
+        int cnt = 0;
+        bool is_valid = true;
+
+        for (auto c : s) {
             if (c == '(')
-                stk.push(c);
+                cnt++;
             else {
-                if (stk.empty()) {
-                    flag = false;
+                if (cnt <= 0) {
+                    is_valid = false;
                     break;
                 }
-                stk.pop();
+                cnt--;
             }
         }
 
-        if (flag && stk.empty())
-            cout << "YES\n";
-        else
-            cout << "NO\n";
+        if (is_valid && cnt == 0) cout << "YES\n";
+        else cout << "NO\n";
     }
 
     return 0;
