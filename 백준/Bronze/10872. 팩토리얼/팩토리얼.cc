@@ -1,20 +1,19 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main () {
-    int fato = 1, N;
-    
-    cin >> N;
-    
-    if(!N){
-        cout << fato;
-        return 0;
-    }
-    else{
-        do{
-            fato = fato*N;
-            N--;
-        }while(N != 0);
-        cout << fato;
-    }
+int fectorial(int n) {
+    if (!n) return 1;
+    return n * fectorial(n - 1);
+}
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int n;
+    cin >> n;
+
+    cout << fectorial(n) << "\n";
+
+    return 0;
 }
