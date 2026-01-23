@@ -1,41 +1,30 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int arr[10];
-bool isused[10];
+vector<int> v;
 int n, m;
 
-void input() {
-    cin >> n >> m;
-}
-
-void func(int size, int start) {
+void backtracking(int start, int size) {
     if (size == m) {
-        for (int i = 0; i < m; i++) 
-            cout << arr[i] << ' ';
-        cout << '\n';
+        for (const auto& i : v)
+            cout << i << " ";
+        cout << "\n";
         return ;
     }
-
-    for (int i = start + 1; i <= n; i++) {
-        if (!isused[i]) {
-            arr[size] = i;
-            isused[i] = true;
-            func(size + 1, i);
-            isused[i] = false;
-        }
+    for (int i = start; i <= n; ++i) {
+        v[size] = i;
+        backtracking(i + 1, size + 1);
     }
-}
-
-void solve() {
-    input();
-    func(0, 0);
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    solve();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    cin >> n >> m;
+
+    v.resize(m);
+    backtracking(1, 0);
+
     return 0;
 }
