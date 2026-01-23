@@ -1,35 +1,31 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int n, m;
-int arr[10];
+vector<int> v;
 
-void input() {
-    cin >> n >> m;
-}
-
-void func(int size) {
+void backtracking(int size) {
     if (size == m) {
-        for (int i = 0; i < m; i++) 
-            cout << arr[i] << ' ';
-        cout << '\n';
+        for (const auto& i : v)
+            cout << i << " ";
+        cout << "\n";
         return ;
     }
-    for (int i = 1; i <= n; i++) {
-        arr[size] = i;
-        func(size + 1);
-    }
-}
 
-void solve() {
-    input();
-    func(0);
+    for (int i = 1; i <= n; ++i) {
+        v[size] = i;
+        backtracking(size + 1);
+    }
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    solve();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    cin >> n >> m;
+
+    v.resize(m);
+    backtracking(0);
+
     return 0;
 }
