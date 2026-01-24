@@ -2,19 +2,16 @@
 using namespace std;
 
 int n, s;
-vector<int> v;
-int sum, ans;
+int arr[20];
+int ans;
 
-void func(int start) {
-    if (start == n)
+void func(int cur, int tot) {
+    if (cur == n) {
+        if (tot == s) ans++;
         return ;
-
-    for (int i = start; i < n; ++i) {
-        sum += v[i];
-        if (sum == s) ans++;
-        func(i + 1);
-        sum -= v[i];
     }
+    func(cur + 1, tot);
+    func(cur + 1, tot + arr[cur]);
 }
 
 int main() {
@@ -22,13 +19,12 @@ int main() {
     cin.tie(0);
 
     cin >> n >> s;
-
-    v.resize(n);
     for (int i = 0; i < n; ++i)
-        cin >> v[i];
+        cin >> arr[i];
 
-    func(0);
+    func(0, 0);
 
+    if (s == 0) ans--;
     cout << ans << "\n";
 
     return 0;
