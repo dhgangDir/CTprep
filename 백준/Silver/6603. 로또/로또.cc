@@ -1,43 +1,36 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int k;
-int arr[15], seq[15];
-
-void input() {
-    cin >> k;
-    if (!k) 
-        exit(0);
-    for (int i = 0; i < k; i++)
-        cin >> seq[i];
-}
-
-void func(int size, int st) {
-    if (size == 6) {
-        for (int i = 0; i < 6; i++) 
-            cout << arr[i] << ' ';
-        cout << '\n';
+const int MAX = 6;
+int arr[15], k;
+void lotto(vector<int>& v, int start, int size) {
+    if (size == MAX) {
+        for (const auto& i : v)
+            cout << i << " ";
+        cout << "\n";
         return ;
     }
 
-    for (int i = st; i < k; i++) {
-        arr[size] = seq[i];
-        func(size + 1, i + 1); 
+    for (int i = start; i < k; ++i) {
+        v[size] = arr[i];
+        lotto(v, i + 1, size + 1);
     }
 }
 
-void solution() {
-   while(true) {
-        input();
-        func(0, 0);
-        cout << '\n';
-   }  
-}
-
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    solution();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    while (true) {
+        cin >> k;
+        if (!k) break;
+
+        vector<int> v(MAX);
+        for (int i = 0; i < k; ++i)
+            cin >> arr[i];
+        lotto(v, 0, 0);
+        cout << "\n";
+    }
+
     return 0;
 }
