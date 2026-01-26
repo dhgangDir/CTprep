@@ -1,19 +1,18 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int square_counts[1004] = {0, 1, 3};
+const int MAX = 1000;
+int dp[MAX + 4] = {0, 1, 3};
 
 int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    for (int i = 3; i <= MAX; ++i)
+        dp[i] = (dp[i - 2] * 2 + dp[i - 1]) % 10007;
+
     int n;
     cin >> n;
 
-    for (int i = 3; i <= n; i++) {
-        if (i % 2) square_counts[i] = (2 * square_counts[i - 1] - 1) % 10007;
-        else square_counts[i] = (2 * square_counts[i - 1] + 1) % 10007;
-    }
-
-    cout << square_counts[n] << '\n';
-
-    return 0;
+    cout << dp[n] << "\n";
 }
