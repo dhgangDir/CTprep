@@ -1,28 +1,25 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_SEQ 1004
-
-int seq[MAX_SEQ], dp[MAX_SEQ], max_int;
-int n;
+const int MAX = 1000;
+int arr[MAX + 4], dp[MAX + 4];
 
 int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int n;
     cin >> n;
 
-    for (int i = 0; i < n; i++) {
-        cin >> seq[i];
+    for (int i = 0; i < n; ++i)
+        cin >> arr[i];
+
+    for (int i = 0; i < n; ++i) {
+        int mx = 0;
+        for (int j = arr[i] - 1; j > 0; --j)
+            mx = max(mx, dp[j]);
+        dp[arr[i]] = mx + 1;
     }
 
-    for (int i = 0; i < n; i++) {
-        dp[i] = 1;
-        for (int j = i; j >= 0; j--) {
-            if (seq[i] > seq[j])
-                dp[i] = max(dp[i], dp[j] + 1);
-        }
-        max_int = max(dp[i], max_int);
-    }
-
-    cout << max_int << '\n';
-
-    return 0;
+    cout << *max_element(dp, dp + MAX + 4) << "\n";
 }
