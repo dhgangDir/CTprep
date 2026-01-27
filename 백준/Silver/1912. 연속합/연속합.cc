@@ -15,7 +15,7 @@ int main() {
 
     dp[0] = arr[0];
     for (int i = 1; i < n; ++i)
-        dp[i] = max({arr[i - 1] + arr[i], dp[i - 1] + arr[i], arr[i]});
+        dp[i] = max(dp[i - 1] + arr[i], arr[i]);
 
     cout << *max_element(dp, dp + n) << "\n";
 
