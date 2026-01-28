@@ -1,41 +1,36 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_SEQ 1004
-
-int dp_down[MAX_SEQ], dp_up[MAX_SEQ], seq[MAX_SEQ];
-int n, max_len;
+const int MAX = 1000;
+int arr[MAX + 4], dpf[MAX + 4], dpb[MAX + 4];
+int ans;
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
+    int n;
     cin >> n;
 
-    for (int i = 0; i < n; i++) {
-        cin >> seq[i];
+    for (int i = 0; i < n; ++i)
+        cin >> arr[i];
+
+    for (int i = 0; i < n; ++i) {
+        dpf[i] = 1;
+        for (int j = 0; j < i; ++j)
+            if (arr[j] < arr[i]) dpf[i] = max(dpf[j] + 1, dpf[i]);
     }
 
-    for (int i = 0; i < n; i++) {
-        dp_down[i] = 1;
-        for (int j = i; j >= 0; j--) {
-            if (seq[j] < seq[i])
-                dp_down[i] = max(dp_down[i], dp_down[j] + 1);
-        }
+    for (int i = n - 1; i >= 0; --i) {
+        dpb[i] = 1;
+        for (int j = n - 1; j > i; --j)
+            if (arr[j] < arr[i]) dpb[i] = max(dpb[j] + 1, dpb[i]);
     }
 
-    for (int i = n - 1; i >= 0; i--) {
-        dp_up[i] = 1;
-        for (int j = i; j < n; j++) {
-            if (seq[j] < seq[i])
-                dp_up[i] = max(dp_up[i], dp_up[j] + 1);
-        }
-        max_len = max(max_len, dp_down[i] + dp_up[i] - 1);
-    }
+    for (int i = 0; i < n; ++i)
+        ans = max(ans, dpf[i] + dpb[i] - 1);
 
-    cout << max_len << '\n';
+    cout << ans << "\n";
 
     return 0;
 }
