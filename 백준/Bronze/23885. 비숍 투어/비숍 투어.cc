@@ -8,8 +8,18 @@ int main() {
     int n, m;
     cin >> n >> m;
 
-    int sx, sy, ex, ey;
+    long long sx, sy, ex, ey;
     cin >> sx >> sy >> ex >> ey;
+    
+    if (sx == ex && sy == ey) {
+        cout << "YES\n";
+        return 0;
+    }
+
+    if (min(n, m) == 1) {
+        cout << "NO\n";
+        return 0;
+    }
 
     if ((sx + sy) % 2 == (ex + ey) % 2)
         cout << "YES\n";
