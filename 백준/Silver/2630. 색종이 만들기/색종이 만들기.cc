@@ -1,65 +1,47 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<vector<int>> vec;
-int blue_cnt, white_cnt;
-int n;
+const int MAX = 128;
+bool paper[MAX + 4][MAX + 4];
+int bcnt = 0, wcnt = 0;
 
-void input() {
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        vector<int> row;
-        for (int j = 0; j < n; j++) {
-            int tmp;
-            cin >> tmp;
-            row.push_back(tmp);
-        }
-        vec.push_back(row);
-    }
-}
-
-void func(int row, int col, int num) {
-    if (num <= 0) return ;
-    int color = vec[row][col];
-    bool flag = true;
-    for (int i = row; i < row + num; i++) {
-        for (int j = col; j < col + num; j++) {
-            if (color != vec[i][j]) {
-                flag = false;
+void func(int x, int y, int size) {
+    int b = 0, w = 0;
+    for (int i = 0; i < size; ++i)
+        for (int j = 0; j < size; ++j) {
+            if (b != 0 && w != 0)
                 break;
-            }
+            if (paper[x + i][y + j]) b++;
+            else w++;
         }
-        if (!flag) break;
-    }
-    if (flag) {
-        if (color) blue_cnt++;
-        else white_cnt++;
+
+    if (b && w) {
+        int m = size / 2;
+        func(x, y, m);
+        func(x, y + m, m);
+        func(x + m, y, m);
+        func(x + m, y + m, m);
     } else {
-        int next_num = num / 2;
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                func(row + next_num * i, col + next_num * j, next_num);
-            }
-        }
+        if (b) bcnt += 1;
+        else wcnt += 1;
     }
-}
-
-void solution() {
-    func(0, 0, n);
-    cout << white_cnt << '\n';
-    cout << blue_cnt << '\n';
-}
-
-void solve() {
-    input();
-    solution();
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    solve();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int n;
+    cin >> n;
+
+    for (int i = 0; i < n; ++i)
+        for (int j = 0; j < n; ++j)
+            cin >> paper[i][j];
+
+    func(0, 0, n);
+
+    cout << wcnt << "\n";
+    cout << bcnt << "\n";
+
     return 0;
 }
