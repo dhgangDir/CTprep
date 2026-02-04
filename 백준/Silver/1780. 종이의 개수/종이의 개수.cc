@@ -1,69 +1,58 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int minus_one_counter, zero_counter, puls_one_counter;
-int square[2200][2200];
+const int MAX = 2187;
+int board[MAX + 4][MAX + 4];
+int cnt[3];
 
-void count(int number) {
-    if (number == -1) minus_one_counter++;
-    else if (number == 0) zero_counter++;
-    else puls_one_counter++;
-} 
+void func(int x, int y, int size) {
+    int start = board[x][y];
+    bool mixed = false;
 
-void func(int n, int r, int c) {
-    int i, j;
-    int sample = square[r][c], partion = n / 3;
-    bool flag = true;
-
-    if (n == 1) {
-        count(sample);
-        return ;
-    }
-
-    for (i = r; i < r + n; i++) {
-        for (j = c; j < c + n; j++) {
-            if (sample != square[i][j]) {
-                flag = false;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            if (start != board[i + x][j + y]) {
+                mixed = true;
                 break;
             }
         }
-        if (!flag) break;
+        if (mixed)
+            break;
     }
 
-    if (flag) 
-        count(sample);
-
-    else {
-        for (i = 0; i < 3; i++) {
-            for (j = 0; j < 3; j++) {
-                if (r + (i * partion) <= 0 && r + (i * partion) >= n) continue;
-                if (c + (j * partion) <= 0 && c + (j * partion) >= n) continue;
-                func(partion, r + i * partion, c + j * partion);
-            }
-        }
+    if (mixed) {
+        int m = size / 3;
+        func(x, y, m);
+        func(x, y + m, m);
+        func (x, y + 2 * m, m);
+        func(x + m, y, m);
+        func(x + m, y + m, m);
+        func(x + m, y + 2 * m, m);
+        func(x + 2 * m, y, m);
+        func(x + 2 * m, y + m, m);
+        func (x + 2 * m, y + 2 * m, m);
+    } else {
+        if (start == -1) cnt[0]++;
+        else if (start == 0) cnt[1]++;
+        else cnt[2]++;
     }
 }
 
 int main() {
-    std::ios_base::sync_with_stdio(false);
-	std::cin.tie(NULL);
-    
-    int n;
-    int i, j;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
+    int n;
     cin >> n;
 
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            cin >> square[i][j];
-        }
-    }
+    for (int i = 0; i < n; ++i)
+        for (int j = 0; j < n; ++j)
+            cin >> board[i][j];
 
-    func(n, 0, 0);
+    func(0, 0, n);
 
-    cout << minus_one_counter << '\n';
-    cout << zero_counter << '\n';
-    cout << puls_one_counter << '\n';
+    for (const auto& i : cnt)
+        cout << i << "\n";
 
     return 0;
 }
